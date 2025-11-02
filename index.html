@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="https://anders0825.github.io/favicon_host/favicon_w.png"
+      type="image/favicon"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="js/main.js" defer></script>
+    <title>Zillioneare</title>
+  </head>
+  <body>
+    <article id="banner">
+      <h1>Who wants to be a Zillionaire?</h1>
+    </article>
+
+    <section id="quiz-menu">
+      <section id="quiz-type">
+        <h3>Select Quiz type:</h3>
+        <select name="type-select" id="type-select">
+          <option value="normal" selected>Normal Quiz</option>
+          <option value="endless">Endless Quiz</option>
+        </select>
+      </section>
+      <section id="rules-section">
+        <article class="rules">
+          <h3>Normal Quiz:</h3>
+          <p>
+            The Normal Quiz consist of 15 questions. Every 5 questions answered
+            correctly, the difficulty will increase. If you answer 3 questions
+            incorrectly you lose.
+          </p>
+        </article>
+        <article class="rules">
+          <h3>Endless Quiz:</h3>
+          <p>
+            Like the name suggest, in Endless Mode the Quiz will continue
+            indefinitely. The difficulty of the questions will be random. We
+            will still keep count of your wrong answers...
+          </p>
+        </article>
+      </section>
+      <section id="quiz-category">
+        <h3>Select Quiz category:</h3>
+        <select name="category-select" id="category-select">
+          <option value="any">Any category</option>
+        </select>
+      </section>
+      <button id="start-btn" class="menu-btn">Start Quiz</button>
+    </section>
+
+    <section id="loading-section">
+      <img
+        id="loading-screen"
+        src="assets/gifs/loading-gif.gif"
+        alt="Loading Animation"
+      />
+      <h3>Loading Questions</h3>
+    </section>
+
+    <section id="quiz">
+      <section id="quiz-cont">
+        <nav>
+          <p id="question-num">Question 1.</p>
+          <p id="difficulty">Easy</p>
+          <section id="hp-cont">
+            <p id="hp">3</p>
+            <img src="assets/images/heart-icon.png" alt="Heart Icon" />
+          </section>
+        </nav>
+        <section id="question-cont">
+          <p id="category">General Knowledge</p>
+          <h3 id="question">
+            Which programming language was developed by Sun Microsystems in
+            1995?
+          </h3>
+        </section>
+        <section id="answer-cont">
+          <button id="answer-one" class="answer-btn" value="null">
+            JavaScript
+          </button>
+          <button id="answer-two" class="answer-btn" value="null">Java</button>
+          <button id="answer-three" class="answer-btn" value="null">C</button>
+          <button id="answer-four" class="answer-btn" value="null">
+            TypeScript
+          </button>
+        </section>
+      </section>
+      <section id="btn-cont">
+        <button id="back-btn">&lt;- Back To Menu</button>
+        <button id="next-btn">Next Question -&gt;</button>
+      </section>
+    </section>
+
+    <section id="game-over" class="end-screen">
+      <h2>GAME OVER</h2>
+      <button class="menu-btn retry-btn">Try Again</button>
+    </section>
+
+    <section id="you-win" class="end-screen">
+      <h2>! Congratulations !</h2>
+      <p>You Are Now a Zillioneare</p>
+      <button class="menu-btn retry-btn">Back To Menu</button>
+    </section>
+  </body>
+</html>
