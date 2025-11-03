@@ -75,8 +75,9 @@ class GameManager {
       this.endlessToken = await retryAsyncFn(fetchToken);
     }
 
-    const endlessQ = await retryAsyncFn(() =>
-      fetchEndlessQuestions(this.endlessToken, category, 50)
+    const endlessQ = await retryAsyncFn(
+      () => fetchEndlessQuestions(this.endlessToken, category, 50),
+      2000
     );
 
     this.questions.push(...endlessQ);
