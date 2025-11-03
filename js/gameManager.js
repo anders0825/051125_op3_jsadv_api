@@ -4,7 +4,7 @@
 
 export { GameManager };
 
-import { fetchQuestions, fetchEndlessQuestions } from "./api.js";
+import { fetchQuestions, fetchToken, fetchEndlessQuestions } from "./api.js";
 import { retryAsyncFn } from "./utility.js";
 
 class GameManager {
@@ -16,6 +16,8 @@ class GameManager {
     this.canContinue = false;
     this.sessionId = 0;
     this.quizType = quizType;
+    this.endlessToken = "";
+    this.loadEndless = false;
   }
 
   // Get - "Calculated Properties"
@@ -41,45 +43,44 @@ class GameManager {
   async loadQuestions(category) {
     const currentSession = this.sessionId;
 
-    //medium
-    await this.#delay();
     const mediumQ = await retryAsyncFn(
       () => fetchQuestions("medium", category),
-      5000
+      2000
     );
-
     if (this.sessionId !== currentSession) return;
     this.questions.push(...mediumQ);
 
     console.log("Medium Questions Loaded");
 
-    //hard
-    await this.#delay();
     const hardQ = await retryAsyncFn(
       () => fetchQuestions("hard", category),
-      5000
+      2000
     );
-
     if (this.sessionId !== currentSession) return;
     this.questions.push(...hardQ);
 
     console.log("Hard Questions Loaded");
+
+    console.log(this.questions);
   }
 
-  async loadEndlessQuestions(category) {
+  async loadEndlessQuestions(category, isNewSession = false) {
     this.hp = 0;
-    this.questions = [];
-    this.sessionId++;
-    const currentSession = this.sessionId;
+    if (isNewSession) {
+      this.questions = [];
+      this.sessionId++;
+    }
+
+    if (!this.endlessToken) {
+      this.endlessToken = await retryAsyncFn(fetchToken);
+    }
 
     const endlessQ = await retryAsyncFn(() =>
-      fetchEndlessQuestions(category, 50)
+      fetchEndlessQuestions(this.endlessToken, category, 50)
     );
 
-    if (this.sessionId !== currentSession) return;
     this.questions.push(...endlessQ);
-
-    console.log("Endless Questions Loaded");
+    console.log("Endless Questions Loaded", this.questions);
   }
 
   answerQuestion(answer) {

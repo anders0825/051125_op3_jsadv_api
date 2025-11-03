@@ -19,7 +19,11 @@ export function makeFirstCaps(str) {
 }
 
 /* Modified version of a retry function fond at: 
-dev.to; Javascript fetch, retry upon failure */
+dev.to; Javascript fetch, retry upon failure 
+
+Now it is a function i can send any async function 
+that can fail through, and it will then retry on fail
+*/
 
 /**
  * Retry function for asyncs that can fail
@@ -34,12 +38,7 @@ export async function retryAsyncFn(
   retries = 3,
   attempt = 1
 ) {
-  let delay = ms;
-  if (attempt === 1) {
-    delay = ms;
-  } else {
-    delay += 1000 * (attempt - 1);
-  }
+  let delay = ms + 1000 * (attempt - 1);
   await new Promise((resolve) => setTimeout(resolve, delay));
   try {
     return await asyncFn();

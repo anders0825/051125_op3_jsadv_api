@@ -52,6 +52,11 @@
       <button id="start-btn" class="menu-btn">Start Quiz</button>
     </section>
 
+    <section id="game-over" class="end-screen">
+      <h2>GAME OVER</h2>
+      <button class="menu-btn retry-btn">Try Again</button>
+    </section>
+
     <section id="loading-section">
       <img
         id="loading-screen"
@@ -59,6 +64,12 @@
         alt="Loading Animation"
       />
       <h3>Loading Questions</h3>
+    </section>
+
+    <section id="you-win" class="end-screen">
+      <h2>! Congratulations !</h2>
+      <p>You Are Now a Zillioneare</p>
+      <button class="menu-btn retry-btn">Back To Menu</button>
     </section>
 
     <section id="quiz">
@@ -72,38 +83,20 @@
           </section>
         </nav>
         <section id="question-cont">
-          <p id="category">General Knowledge</p>
-          <h3 id="question">
-            Which programming language was developed by Sun Microsystems in
-            1995?
-          </h3>
+          <p id="category"></p>
+          <h3 id="question"></h3>
         </section>
         <section id="answer-cont">
-          <button id="answer-one" class="answer-btn" value="null">
-            JavaScript
-          </button>
-          <button id="answer-two" class="answer-btn" value="null">Java</button>
-          <button id="answer-three" class="answer-btn" value="null">C</button>
-          <button id="answer-four" class="answer-btn" value="null">
-            TypeScript
-          </button>
+          <button id="answer-one" class="answer-btn" value="null"></button>
+          <button id="answer-two" class="answer-btn" value="null"></button>
+          <button id="answer-three" class="answer-btn" value="null"></button>
+          <button id="answer-four" class="answer-btn" value="null"></button>
         </section>
       </section>
       <section id="btn-cont">
         <button id="back-btn">&lt;- Back To Menu</button>
         <button id="next-btn">Next Question -&gt;</button>
       </section>
-    </section>
-
-    <section id="game-over" class="end-screen">
-      <h2>GAME OVER</h2>
-      <button class="menu-btn retry-btn">Try Again</button>
-    </section>
-
-    <section id="you-win" class="end-screen">
-      <h2>! Congratulations !</h2>
-      <p>You Are Now a Zillioneare</p>
-      <button class="menu-btn retry-btn">Back To Menu</button>
     </section>
   </body>
 </html>

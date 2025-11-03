@@ -2,11 +2,12 @@
 //// api.js
 //
 
-export { fetchCategories, fetchQuestions, fetchEndlessQuestions };
+export { fetchCategories, fetchQuestions, fetchToken, fetchEndlessQuestions };
 
 // API - Endponints:
 const API_CATEGORY_PATH = `https://opentdb.com/api_category.php`;
 const API_QUESTION_PATH = `https://opentdb.com/api.php`;
+const API_TOKEN_PATH = `https://opentdb.com/api_token.php?command=request`;
 
 async function fetchCategories() {
   const url = API_CATEGORY_PATH;
@@ -14,7 +15,7 @@ async function fetchCategories() {
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error(`Error fetching categories: ${response.status}`);
+    throw new Error(`fetchCategories(): ${response.status}`);
   }
 
   const data = await response.json();
@@ -30,23 +31,40 @@ async function fetchQuestions(difficulty, category, amount = 5) {
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error(`Error fetching questions: ${response.status}`);
+    throw new Error(
+      `fetchQuestions(${difficulty}, ${category}, ${amount}): ${response.status}`
+    );
   }
 
   const data = await response.json();
   return data.results;
 }
 
-async function fetchEndlessQuestions(category, amount = 50) {
-  const url =
-    category === "any"
-      ? `${API_QUESTION_PATH}?amount=${amount}&type=multiple`
-      : `${API_QUESTION_PATH}?amount=${amount}&category=${category}&type=multiple`;
+async function fetchToken() {
+  const url = API_TOKEN_PATH;
 
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error(`Error fetching questions: ${response.status}`);
+    throw new Error(`fetchToken: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.token;
+}
+
+async function fetchEndlessQuestions(token, category, amount = 50) {
+  const url =
+    category === "any"
+      ? `${API_QUESTION_PATH}?amount=${amount}&token=${token}&type=multiple`
+      : `${API_QUESTION_PATH}?amount=${amount}&token=${token}&category=${category}&type=multiple`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(
+      `fetchEndlessQuestions(${category}, ${amount}): ${response.status}`
+    );
   }
 
   const data = await response.json();

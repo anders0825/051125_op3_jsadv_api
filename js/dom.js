@@ -56,37 +56,24 @@ function renderQuestion(question, idx) {
 }
 
 function displayState(state) {
-  if (state === "menu") {
-    domEl.quizMenu.style.display = "flex";
-    domEl.loadScreen.style.display = "none";
-    domEl.quizCont.style.display = "none";
-    domEl.gameOverScreen.style.display = "none";
-    domEl.youWinScreen.style.display = "none";
-  } else if (state === "loading") {
-    domEl.quizMenu.style.display = "none";
-    domEl.loadScreen.style.display = "flex";
-    domEl.quizCont.style.display = "none";
-    domEl.gameOverScreen.style.display = "none";
-    domEl.youWinScreen.style.display = "none";
-  } else if (state === "inGame") {
-    domEl.quizMenu.style.display = "none";
-    domEl.loadScreen.style.display = "none";
-    domEl.quizCont.style.display = "flex";
-    domEl.gameOverScreen.style.display = "none";
-    domEl.youWinScreen.style.display = "none";
-  } else if (state === "gameOver") {
-    domEl.quizMenu.style.display = "none";
-    domEl.loadScreen.style.display = "none";
-    domEl.quizCont.style.display = "flex";
-    domEl.gameOverScreen.style.display = "flex";
-    domEl.youWinScreen.style.display = "none";
-  } else if (state === "youWin") {
-    domEl.quizMenu.style.display = "none";
-    domEl.loadScreen.style.display = "none";
-    domEl.quizCont.style.display = "none";
-    domEl.gameOverScreen.style.display = "none";
-    domEl.youWinScreen.style.display = "flex";
-  }
+  const screens = {
+    menu: [domEl.quizMenu],
+    loading: [domEl.loadScreen],
+    inGame: [domEl.quizCont],
+    gameOver: [domEl.gameOverScreen, domEl.quizCont],
+    youWin: [domEl.youWinScreen],
+  };
+
+  /* 
+Object.values(obj) → array of obj values 
+.flat() → Returns a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+*/
+
+  Object.values(screens)
+    .flat()
+    .forEach((el) => (el.style.display = "none"));
+
+  (screens[state] || []).forEach((el) => (el.style.display = "flex"));
 }
 
 function renderHp(hp) {
